@@ -1,0 +1,38 @@
+# Базовые файлы Python (Компиляция и Кэш)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Локальное виртуальное окружение и UV
+
+.venv/
+venv/
+env/
+.Python
+
+
+# Инструменты тестирования и линтеры (Pytest, Ruff)
+
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+
+# Конфиденциальные данные и Настройки
+
+.env
+*.log
+
+
+# Игнорируем локальные папки с сырыми PDF/TXT документами и скриптами парсинга
+data/
+scripts/
+
+.vscode/
+
+.DS_Store
+Thumbs.db

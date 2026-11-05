@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  # Локальный движок Ollama (CUDA по возможности, иначе CPU)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama_local_node
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: always
+    environment:
+      - OLLAMA_NUM_PARALLEL=4
+      - OLLAMA_KEEP_ALIVE=-1
+
+  # Векторная база данных Qdrant
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant_vector_db
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: always
+
+  # Мультиагентный сервис техподдержки
+  llm-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_llm_service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - qdrant
+      - ollama
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - .:/app
+      - /app/.venv
+      - ~/.cache/fastembed:/root/.cache/fastembed
+
+volumes:
+  qdrant_data:
+  ollama_models:
+
+

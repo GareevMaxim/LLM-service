@@ -1,0 +1,44 @@
+[project]
+name = "job-postings-llm"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sqlmodel>=0.0.14",
+    "asyncpg>=0.29.0",
+    "psycopg2-binary>=2.9.9",
+    "pgvector>=0.2.4",
+    "numpy>=1.24.0",
+    "langchain>=0.1.0",
+    "langchain-core>=0.1.0",
+    "langchain-openai>=0.1.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "aiosqlite>=0.20.0",
+    "langgraph>=0.2.24",
+    "fastapi==0.115.5",
+    "uvicorn[standard]==0.30.6",
+    "langchain-ollama>=0.1.0",
+    "langfuse>=3.6.2",
+    "ipykernel>=6.30.1",
+    "jobspy>=0.31.0",
+    "python-jobspy>=1.1.82",
+    "qdrant-client>=1.20.0",
+    "pypdf>=6.21.4",
+    "langchain-community>=0.3.31",
+    "fastembed>=0.9.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "src"]
+asyncio_mode = "auto"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+]
